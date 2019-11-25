@@ -1,0 +1,29 @@
+$color-primary: #55c57a;
+$color-primary-light: #7ed56f;
+$color-primary-dark: #28b485;
+
+$color-secondary-light: #ffb900;
+$color-secondary-dark: #ff7730;
+
+$color-tertiary-light: #2998ff;
+$color-tertiary-dark: #5643fa;
+
+.player-list-container{
+    width: 85vw;
+    margin: auto auto;
+    padding: 5rem;
+    opacity: 0.8;
+
+    .ui-dataview-header {
+        padding: 0px!important;
+        p-header {
+            div{
+                // background: $color-primary-dark;
+            }
+        }
+    }
+    .ui-dataview-content {
+        height: 70vh;
+        overflow-y: auto;
+    }
+}
