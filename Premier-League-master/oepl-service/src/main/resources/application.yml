@@ -1,0 +1,21 @@
+spring:
+    datasource:
+        hikari:
+            connection-test-query: SELECT 1 FROM DUAL
+            minimum-idle: 1
+            maximum-pool-size: 5
+        driver-class-name: com.mysql.jdbc.Driver
+        url: jdbc:mysql://18.219.237.223:3306/icms?createDatabaseIfNotExist=true&autoReconnect=true&useSSL=false
+        username: icms
+        password: icms
+        initialization-mode: always
+    jpa:
+      hibernate:
+        ddl-auto: update
+        dialect: org.hibernate.dialect.MySQL5Dialect
+# --- server
+server:
+  port: 8083
+
+
+
