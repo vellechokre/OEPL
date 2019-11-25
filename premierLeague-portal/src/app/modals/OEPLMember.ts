@@ -7,4 +7,5 @@ export class OEPLMember {
     team: string;
     price: number;
     imageUrl: string;
+    number: string;
 }

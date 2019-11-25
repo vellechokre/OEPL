@@ -1,14 +1,15 @@
 <div class="header">
+
     <div class="bidding-top-section">
         <!-- [listStyle]="{'height':'250px', 'width':'100px'}" -->
         <div class="ui-g-6" style="height: 6vh;">
-            <p-orderList [value]="players" [styleClass]="'bidding-list'" header="Players" filter="filter" filterBy="id"
-                filterPlaceholder="Filter by Id" dragdrop="true" dragdropScope="cars">
+            <p-orderList [value]="players" [styleClass]="'bidding-list'" header="Players" filter="filter" filterBy="id" filterPlaceholder="Filter by Id"
+                dragdrop="true" dragdropScope="cars">
                 <ng-template let-player pTemplate="item">
                     <div class="ui-helper-clearfix" (click)="onPlayerSelection(player)">
                         <img src="{{player.imageUrl}}" style="display:inline-block;margin:2px 0 2px 2px" width="48">
-                        <div style="font-size:14px;float:right;margin:15px 5px 0 0">{{player.name}} -
-                            {{player.project}} - {{player.skill}}</div>
+                        <div style="font-size:14px;float:right;margin:15px 5px 0 0">{{player.name}} - {{player.project}}
+                            - {{player.skill}}</div>
                     </div>
                 </ng-template>
             </p-orderList>
@@ -16,7 +17,7 @@
         <div *ngIf="selectedPlayer.id" class="ui-g-6" style="height: 6vh;">
             <p-card>
                 <div style="text-align: center; margin-top:0px">
-                    <h3 style="margin-top: 0px;">{{selectedPlayer?.name}}</h3>
+                    <h3 style="margin-top: 0px; color: orangered;">{{selectedPlayer?.name}}</h3>
                 </div>
                 <div style="text-align: center">
                     <div style="float: left; margin-right: 10%">
@@ -25,10 +26,27 @@
                     <table class="inline-block table-padding">
                         <tr>
                             <th style="width: 60px;">Id:</th>
-                            <td>{{selectedPlayer?.id}}</td>
+                            <td style="text-align: left;">{{selectedPlayer?.id}}</td>
+
+                            <th style="width: 30px;"></th>
+                            <td></td>
+
+                            <th style="width: 60px;">Skill:</th>
+                            <td style="text-align: left;">{{selectedPlayer?.skill}}</td>
+                        </tr>
+
+                        <tr>
+                            <th style="width: 60px;">Project:</th>
+                            <td style="text-align: left;">{{selectedPlayer?.project}}</td>
+
+                            <th style="width: 30px;"></th>
+                            <td></td>
+
+                            <th style="width: 60px;">Mobile:</th>
+                            <td style="text-align: left;">{{selectedPlayer?.number}}</td>
                         </tr>
                     </table>
-                    <table class="inline-block table-padding" cellspacing="10">
+                    <!-- <table class="inline-block table-padding" cellspacing="10">
                         <tr>
                             <th style="width: 60px;">Skill:</th>
                             <td>{{selectedPlayer?.skill}}</td>
@@ -40,6 +58,12 @@
                             <td>{{selectedPlayer?.project}}</td>
                         </tr>
                     </table>
+                    <table class="inline-block table-padding">
+                            <tr>
+                                <th style="width: 60px;">Mobile:</th>
+                                <td>{{selectedPlayer?.number}}</td>
+                            </tr>
+                        </table> -->
                     <br>
                     <form #playerForm="ngForm">
                         <table class="inline-block table-padding">
@@ -57,8 +81,8 @@
                             <tr>
                                 <th style="width: 60px;">Team:</th>
                                 <td>
-                                    <p-dropdown [options]="teams" name="teamselection" [appendTo]="'body'" [(ngModel)]="selectedTeam"
-                                        [placeholder]="'Select Team'" required></p-dropdown>
+                                    <p-dropdown [options]="teams" name="teamselection" [appendTo]="'body'" [(ngModel)]="selectedTeam" [placeholder]="'Select Team'"
+                                        required></p-dropdown>
                                 </td>
                             </tr>
                         </table>
@@ -72,36 +96,44 @@
             </p-card>
         </div>
     </div>
+   
     <div class="bidding-bottom-section" style="text-align: center; margin:auto">
         <div class="ui-g-12 " style="text-align: center; margin:auto">
             <ng-template let-team let-last="last" ngFor [ngForOf]="allTeams" let-i="index">
                 <div class=" team-card" style="margin-right: 20px">
                     <div style="text-align: center;
-                    background: #ccc;
                     color: #000;
                     font-weight: bold;">
-                        <h3 style="display:inline-block; margin-right: 15px;">{{team.teamName}}</h3>
-                        <h3 style="display:inline-block; margin-right: 15px; color: green">{{team.amount}}</h3>
-                        <h3 style="display:inline-block">{{team?.members?.length}}</h3>
+                        <img src={{team.imageUrl}} alt={{team.teamName}} width="45px" height="45px">
+                        <h3 style="display:inline-block; margin-right: 7px; font-size: 20px; font-weight: bold;
+                        color: darkblue; margin-left: 5px;">{{team.teamName}}
+
+                        </h3>
+                        <h3 style="display:inline-block;  color: green; font-size: 12px;
+                        font-weight: bold;">{{team.amount}} </h3>
+                        <span style="margin-right:2px;margin-left:2px">/</span>
+                        <h6 style="display:inline-block; font-size: 12px; font-weight: bold;color: red; margin-right: 7px;">{{team.maxBidAmount}}</h6>
+                        <h3 style="display:inline-block; font-size: 15px; font-weight: bold;">{{team?.members?.length}}</h3>
+
                     </div>
                     <div class="ui-g-12">
-                        <div class="ui-g-4">
+                        <div class="ui-g-4 custom-header">
                             Name
                         </div>
-                        <div class="ui-g-4">
+                        <div class="ui-g-4 custom-header">
                             Price
                         </div>
-                        <div class="ui-g-4">
+                        <div class="ui-g-4 custom-header">
                             Skill
                         </div>
 
                     </div>
                     <hr>
                     <ng-template let-player let-last="last" ngFor [ngForOf]="team.members" let-i="index">
-                        <div class="ui-g-12 list">
-                            <div class="ui-g-4">{{player.name}}</div>
-                            <div class="ui-g-4">{{player.price}}</div>
-                            <div class="ui-g-4">{{player.skill}}</div>
+                        <div class="ui-g-12 list " style="padding: 0.1em;">
+                            <div class="ui-g-4 custom-text" style="padding: 0.1em;">{{player.name}}</div>
+                            <div class="ui-g-4 custom-text" style="padding: 0.1em;">{{player.price}}</div>
+                            <div class="ui-g-4 custom-text" style="padding: 0.1em;">{{player.skill}}</div>
                         </div>
                         <hr>
                     </ng-template>

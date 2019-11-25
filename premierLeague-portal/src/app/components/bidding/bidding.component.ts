@@ -29,13 +29,6 @@ export class BiddingComponent implements OnInit {
 
     this.getPlayers();
     this.getTeams();
-
-    /* this.teams = [
-      { label: 'Royals', value: 'Royals' },
-      { label: 'Riders', value: 'Riders' },
-      { label: 'Rangers', value: 'Rangers' },
-      { label: 'Rovers', value: 'Rovers' }
-    ]; */
   }
 
   getPlayers() {
@@ -53,6 +46,7 @@ export class BiddingComponent implements OnInit {
         if (response) {
           this.allTeams = response;
           this.setTeams(response);
+          this.setMaxBidAmount();
         }
       })
   }
@@ -66,6 +60,21 @@ export class BiddingComponent implements OnInit {
 
   onPlayerSelection(player) {
     this.selectedPlayer = player;
+  }
+
+  setMaxBidAmount(){
+    var team: OEPLTeam = this.allTeams.filter((team) => team.id === this.selectedTeam)[0];
+    this.allTeams.forEach((team)=>{
+      var teamSize = 15;
+      if (team.members) {
+        teamSize = teamSize - team.members.length;
+      }
+      if(team.amount <100){
+        team.maxBidAmount = 0;
+      }else{
+      team.maxBidAmount = (team.amount - (teamSize-1) * 100);
+      }
+    })
   }
 
   assignPlayerToTeam() {
@@ -97,19 +106,32 @@ export class BiddingComponent implements OnInit {
 
   validateBeforeSave(): boolean {
     var team: OEPLTeam = this.allTeams.filter((team) => team.id === this.selectedTeam)[0];
+
+    if (team.amount < 100){
+      return false;
+    }
+
     var teamSize = 15;
     if (team.members) {
       teamSize = teamSize - team.members.length;
     }
 
-    if (!((team.amount - teamSize * 100) >= this.selectedPlayer.price)) {
+    if(team.maxBidAmount<this.selectedPlayer.price){
       return false;
-    } else {
+    }else{
       return true;
     }
+
+    // if (((team.amount - (teamSize-1) * 100) > this.selectedPlayer.price)) {
+    //   return false;
+    // } else {
+    //   return true;
+    // }
   }
 
 }
+
+
 
 export class SITem {
   label: any;

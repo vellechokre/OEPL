@@ -7,4 +7,6 @@ export class OEPLTeam {
     captain: OEPLMember = new OEPLMember();
     members: OEPLMember[] = [];
     amount: number;
+    imageUrl: string;
+    maxBidAmount: number;
 }

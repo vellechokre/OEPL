@@ -26,4 +26,8 @@ Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protrac
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
 
+<<<<<<< HEAD:test-match-master/README.md
 ##test
+=======
+##DONE
+>>>>>>> 75ab8d24ca8c9a0be87a32ed83c522d3a59dcc7a:premierLeague-portal/README.md
